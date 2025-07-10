@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #app{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <div id="tareas"></div>
+
+    <!-- Curso -->
+    <script>
+        const products =[
+            { title: "Buger", price: 120},
+            { title: "Pizza", price: 20},
+            { title: "Salchipapa", price: 40},
+        ];
+        
+        const app = document.getElementById("app");
+        products.forEach(product => {
+            app.innerHTML += `<li>${product.title} - ${product.price}</li>`;
+        })
+    </script>
+
+    <!-- yo -->
+    <script>
+        const tareas = [
+            { title: "Paginas", info: "Informacion"},
+            { title: "Paginas", info: "Diseño"},
+            { title: "Paginas", info: "Estilo"},
+        ];
+
+        const tarea = document.getElementById("tareas");
+        tareas.forEach(tareas => {
+            tarea.innerHTML += `<li>${tareas.title} - ${tareas.info} - <input type="checkbox"> </li>`;
+        })
+    </script>
+</body>
+</html>
