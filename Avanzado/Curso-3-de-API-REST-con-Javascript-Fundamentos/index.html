@@ -5,39 +5,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gatitos aleatorias</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Michis app</h1>
-    
-    <span id="Error"></span>
+    <main class="main">
 
-    <section id="randomMichis">
-        <h2>Gatitos aleatorios</h2>
+        <h1>Michis App</h1>
+
+        <section id="randomMichis">
+
+            <span id="error"></span>
+
+            <h2>Gatitos aleatorios</h2>
+
+            <section class="aleatorias">
+
+                <article class="cartas">
+                    <img id="img1" class="img-aleatorias" alt="foto gato aleatorios">
+                    <button id="btn1" class="btn-guardar-favoritas"> Guardar michi en favorito</button>
+                </article>
+
+                <article class="cartas">
+                    <img id="img2" class="img-aleatorias" alt="foto gato aleatorios">
+                    <button id="btn2" class="btn-guardar-favoritas"> Guardar michi en favorito</button>
+                </article>
+            </section>
+
+            <button class="recargar" onclick="loadRandomMichis()">Recargar</button>
+        </section>
+
+        <section id="uploadingMichi">
+            <h2>Sube la foto de tu michi</h2>
+
+            <form id="uploadingForm" >
+                <input id="file" type="file" name="file">
+                <button class="btn-uploading" type="button" onclick="uploadMichiPhoto()">Subir foto</button>
+            </form>
+        </section>
+
+        <section id="favoriteMichis"></section>
 
 
-        <article>
-            <img id="img1" width="150px" alt="foto gato aleatorios">
-            <button>Guardar michi en favorito</button>
-        </article>
-
-        <article>
-            <img id="img2" width="150px" alt="foto gato aleatorios">
-            <button>Guardar michi en favorito</button>
-        </article>
-
-        <button onclick="loadRandomMichi()">Recargar</button>
-    </section>
-
-    <section id="favoritesMichis">
-        <h2>Gatitos favoritos</h2>
-
-        <article>
-            <img id="fav1" width="150px" alt="foto gato aleatorios">
-            <button>Sacar al michi de favoritos</button>
-        </article>
-    </section>
-
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="main.js"></script>
 </body>
 
