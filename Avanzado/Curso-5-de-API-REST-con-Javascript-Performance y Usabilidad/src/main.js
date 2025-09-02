@@ -8,8 +8,18 @@ const api = axios.create({
   },
 });
 
+// utils
 
-function createMovies(movies, container) {
+const lazyLoad = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const url = entry.target.getAttribute('data-img')
+      entry.target.setAttribute('src', url);
+    }
+  });
+})
+
+function createMovies(movies, container, lazyLoad = false) {
   container.innerHTML = '';
 
   movies.forEach(movie => {
@@ -23,9 +33,13 @@ function createMovies(movies, container) {
     movieImg.classList.add('movie-img');
     movieImg.setAttribute('alt', movie.title);
     movieImg.setAttribute(
-      'src',
+      lazyLoad ? 'data-img' : 'src',
       'https://image.tmdb.org/t/p/w300' + movie.poster_path,
     );
+
+    if (lazyLoad) {
+      lazyLoad.observe(movieImg)
+    }
 
     movieContainer.appendChild(movieImg);
     container.appendChild(movieContainer);
@@ -35,7 +49,7 @@ function createMovies(movies, container) {
 function createCategories(categories, container) {
   container.innerHTML = "";
 
-  categories.forEach(category => {  
+  categories.forEach(category => {
     const categoryContainer = document.createElement('div');
     categoryContainer.classList.add('category-container');
 
@@ -53,6 +67,8 @@ function createCategories(categories, container) {
   });
 }
 
+
+
 async function getTrendingMoviesPreview() {
   const { data } = await api('trending/movie/day');
   const movies = data.results;
@@ -65,7 +81,7 @@ async function getCategegoriesPreview() {
   const { data } = await api('genre/movie/list');
   const categories = data.genres;
 
-  createCategories(categories, categoriesPreviewList)  ;
+  createCategories(categories, categoriesPreviewList);
 }
 
 async function getMoviesByCategory(id) {
@@ -110,7 +126,7 @@ async function getMovieById(id) {
     ),
     url(${movieImgUrl})
   `;
-  
+
   movieDetailTitle.textContent = movie.title;
   movieDetailDescription.textContent = movie.overview;
   movieDetailScore.textContent = movie.vote_average;
